@@ -13,32 +13,19 @@ const HomePage = () => {
     return (
         <>
             <CopilotKit runtimeUrl="http://localhost:3000/api">
-                {/* <CopilotTextarea
-        className="min-h-40 border h-40 p-2 overflow-hidden"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Write your code..."
-        autosuggestionsConfig={{
-          textareaPurpose: `Asisst me in writing a essay.`,
-          chatApiConfigs: {}
-        }}
-      /> */}
                 <div
                     style={
                         {
                             "--copilot-kit-primary-color": "rgb(47, 53, 102)",
                         }
-                        // as CopilotKitCSSProperties
                     }>
                     <CopilotPopup
                         labels={{
-                            title: "Your Assistant",
-                            initial: "Hi! 👋 How can I assist you today?",
+                            title: "Progrify Chatbot",
+                            initial: "Hi! 👋 Ask me anything related to your code?",
                         }}
                     />
                 </div>
-                {/* <LandingPage/>
-        <HomePage /> */}
                 <HomePageExtend />
             </CopilotKit>
         </>
@@ -57,7 +44,6 @@ const HomePageExtend = () => {
         // Replace \n with actual new line
         cleanedStr = cleanedStr.replace(/\\n/g, '\n');
         cleanedStr = cleanedStr.replace(/\\t/g, '\t');
-        console.log(cleanedStr)
         return cleanedStr;
     };
 
@@ -109,7 +95,6 @@ const HomePageExtend = () => {
         handler: ({ updatedCode }) => {
             // updatedCode = cleanCodeString(updatedCode)
             setInputCode(updatedCode);
-            console.log(updatedCode)
         },
     });
 
@@ -124,15 +109,24 @@ const HomePageExtend = () => {
 
     return (
         <div className="min-h-screen bg-gray-900 text-white p-8">
-            <header className="text-3xl font-bold mb-6">AI Code Editor</header>
+            <section className=" rounded-lg shadow-md  ">
+                <div className="flex justify-between w-full mx-auto">
+                    <div>
+                        <h1 className="text-2xl md:text-3xl font-bold mb-1">Progrify</h1>
+                        <p className="text-sm md:text-sm text-gray-300 mb-6">
+                            Master programming with our AI-powered code editor and intelligent assistant.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* <header className="text-md mb-6"></header> */}
             <div className="flex justify-between items-center mb-4">
-
+                <div className='flex items-center gap-8'>
+                <header className="text-xl font-bold mb-2">AI Code Editor</header>
                 <Dropdown language={language} handleLanguageChange={handleLanguageChange} />
+                </div>
                 <div className='flex gap-6 mr-4'>
-                    <button className='px-4 py-2 rounded-md transition  bg-green-600' onClick={() => { cleanCodeString(inputCode) }}>
-                        Explain
-                    </button>
-
                     <button
                         onClick={handleRun}
                         disabled={isRunning}
@@ -147,10 +141,12 @@ const HomePageExtend = () => {
                 {/* Input Code Editor */}
                 <div className="flex-1 bg-gray-800 rounded-lg overflow-hidden">
                     <div className="flex justify-between items-center bg-gray-700 p-4 rounded-t-lg">
+
                         <h2 className="text-xl font-semibold">Input Code</h2>
+                        <h2 className="text-md text-gray-300 font-semibold">Ask copilot if you need some help.</h2>
                     </div>
                     <Editor
-                        height="600px"
+                        height="500px"
                         language={language}
                         value={inputCode}
                         theme="vs-dark"
@@ -164,7 +160,7 @@ const HomePageExtend = () => {
                 {/* Output Section */}
                 <div className="flex-1 bg-gray-800 rounded-lg p-4">
                     <h2 className="text-xl font-semibold mb-2">Output</h2>
-                    <pre className="whitespace-pre-wrap h-[552px] overflow-y-auto bg-gray-900 p-4 rounded">
+                    <pre className="whitespace-pre-wrap h-[500px] overflow-y-auto bg-gray-900 p-4 rounded">
                         {output}
                     </pre>
                 </div>

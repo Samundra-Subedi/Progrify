@@ -6,7 +6,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gray-900 text-blue-100 md:px-20">
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-5xl font-bold mb-8 text-center text-blue-400">
-          About CodeAI Editor
+          About Progrify
         </h1>
 
         <div className="bg-gray-800 border border-blue-800 rounded-lg p-6 mb-12">
@@ -55,6 +55,7 @@ export default function AboutPage() {
               Get Started Now
             </a>
           </Link>
+
         </div>
       </div>
     </div>

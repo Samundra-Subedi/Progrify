@@ -17,7 +17,7 @@ sayhello("world")
 #include <stdio.h>
   
 void sayhello(const char *a) {
-    printf("Hello, %s!\\n", a);
+    printf("Hello, %s!", a);
 }
   
 int main() {
