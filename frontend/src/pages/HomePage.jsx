@@ -1,11 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { useCopilotReadable, useCopilotAction } from "@copilotkit/react-core";
+import { useCopilotChatSuggestions } from "@copilotkit/react-ui";
 import Editor from '@monaco-editor/react';
 import Dropdown from '../components/Dropdown';
 import { CODE_SNIPPETS } from '../utils/Constants';
 import { executeCode } from '../api/Api';
+import { CopilotKit } from "@copilotkit/react-core";
+import { CopilotPopup } from "@copilotkit/react-ui";
+import "@copilotkit/react-ui/styles.css";
 
 const HomePage = () => {
+    return (
+        <>
+            <CopilotKit runtimeUrl="http://localhost:3000/api">
+                {/* <CopilotTextarea
+        className="min-h-40 border h-40 p-2 overflow-hidden"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Write your code..."
+        autosuggestionsConfig={{
+          textareaPurpose: `Asisst me in writing a essay.`,
+          chatApiConfigs: {}
+        }}
+      /> */}
+                <div
+                    style={
+                        {
+                            "--copilot-kit-primary-color": "rgb(47, 53, 102)",
+                        }
+                        // as CopilotKitCSSProperties
+                    }>
+                    <CopilotPopup
+                        labels={{
+                            title: "Your Assistant",
+                            initial: "Hi! 👋 How can I assist you today?",
+                        }}
+                    />
+                </div>
+                {/* <LandingPage/>
+        <HomePage /> */}
+                <HomePageExtend />
+            </CopilotKit>
+        </>
+    );
+}
+
+const HomePageExtend = () => {
     const [language, setLanguage] = useState('python');
     const [inputCode, setInputCode] = useState(CODE_SNIPPETS[language]);
     const [output, setOutput] = useState('');
@@ -19,7 +59,7 @@ const HomePage = () => {
         cleanedStr = cleanedStr.replace(/\\t/g, '\t');
         console.log(cleanedStr)
         return cleanedStr;
-      };
+    };
 
     // Function to handle changes in the input code editor
     const handleInputChange = (value) => {
@@ -59,33 +99,37 @@ const HomePage = () => {
         name: "updateCode",
         description: "Updates the code. The code should run without any changes. It should also contain proper spacing.",
         parameters: [
-          {
-            name: "updatedCode",
-            type: "string",
-            description: "The updated code",
-            required: true,
-          },
+            {
+                name: "updatedCode",
+                type: "string",
+                description: "The updated code",
+                required: true,
+            },
         ],
         handler: ({ updatedCode }) => {
             // updatedCode = cleanCodeString(updatedCode)
-          setInputCode(updatedCode);
-          console.log(updatedCode)
+            setInputCode(updatedCode);
+            console.log(updatedCode)
         },
-      });
+    });
 
-      useEffect(() => {
+    useCopilotChatSuggestions({
+        instructions: `The following is the code written in ${language} language.`,
+    });
+
+    useEffect(() => {
         setInputCode(cleanCodeString(inputCode))
-      }, [inputCode])
-      
+    }, [inputCode])
+
 
     return (
         <div className="min-h-screen bg-gray-900 text-white p-8">
-            <header className="text-3xl font-bold mb-6">CodeSight</header>
+            <header className="text-3xl font-bold mb-6">AI Code Editor</header>
             <div className="flex justify-between items-center mb-4">
 
                 <Dropdown language={language} handleLanguageChange={handleLanguageChange} />
                 <div className='flex gap-6 mr-4'>
-                    <button className='px-4 py-2 rounded-md transition  bg-green-600' onClick={()=>{cleanCodeString(inputCode)}}>
+                    <button className='px-4 py-2 rounded-md transition  bg-green-600' onClick={() => { cleanCodeString(inputCode) }}>
                         Explain
                     </button>
 
@@ -128,5 +172,7 @@ const HomePage = () => {
         </div>
     );
 };
+
+
 
 export default HomePage;
