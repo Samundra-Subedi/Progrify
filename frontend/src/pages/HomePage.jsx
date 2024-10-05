@@ -8,6 +8,7 @@ import { executeCode } from '../api/Api';
 import { CopilotKit } from "@copilotkit/react-core";
 import { CopilotPopup } from "@copilotkit/react-ui";
 import "@copilotkit/react-ui/styles.css";
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
     return (
@@ -83,7 +84,7 @@ const HomePageExtend = () => {
 
     useCopilotAction({
         name: "updateCode",
-        description: "Updates the code. The code should run without any changes. It should also contain proper spacing.",
+        description: "Updates the code, if user asks to change or update code. The code should run without any changes. It should also contain proper spacing.",
         parameters: [
             {
                 name: "updatedCode",
@@ -112,19 +113,21 @@ const HomePageExtend = () => {
             <section className=" rounded-lg shadow-md  ">
                 <div className="flex justify-between w-full mx-auto">
                     <div>
-                        <h1 className="text-2xl md:text-3xl font-bold mb-1">Progrify</h1>
+                        <Link to='/'>
+                            <h1 className="text-2xl md:text-3xl font-bold mb-1">Progrify</h1>
+                        </Link>
                         <p className="text-sm md:text-sm text-gray-300 mb-6">
                             Master programming with our AI-powered code editor and intelligent assistant.
                         </p>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* <header className="text-md mb-6"></header> */}
-            <div className="flex justify-between items-center mb-4">
+            < div className="flex justify-between items-center mb-4" >
                 <div className='flex items-center gap-8'>
-                <header className="text-xl font-bold mb-2">AI Code Editor</header>
-                <Dropdown language={language} handleLanguageChange={handleLanguageChange} />
+                    <header className="text-xl font-bold mb-2">AI Code Editor</header>
+                    <Dropdown language={language} handleLanguageChange={handleLanguageChange} />
                 </div>
                 <div className='flex gap-6 mr-4'>
                     <button
@@ -136,7 +139,7 @@ const HomePageExtend = () => {
                         {isRunning ? 'Running...' : 'Run Code'}
                     </button>
                 </div>
-            </div>
+            </div >
             <div className="flex flex-col lg:flex-row gap-4">
                 {/* Input Code Editor */}
                 <div className="flex-1 bg-gray-800 rounded-lg overflow-hidden">
@@ -165,7 +168,7 @@ const HomePageExtend = () => {
                     </pre>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
