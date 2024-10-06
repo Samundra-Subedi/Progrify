@@ -97,13 +97,15 @@ Check out the [live demo here](https://vimeo.com/1016505368?share=copy) to explo
 #### Clone the repository:
 ```bash
 git clone https://github.com/Samundra-Subedi/Progrify.git
+cd Progrify
 ```
-#### Setup Frontend
+
+### Setup Frontend
 ```bash
 cd frontend
 ```
 
-### Install dependencies:
+#### Install dependencies:
 ```bash
 npm install
 ```
@@ -111,7 +113,7 @@ npm install
 ```bash
 npm run dev
 ```
-#### Setup Backend
+### Setup Backend
 ```bash
 cd backend
 ```
@@ -123,10 +125,7 @@ GOOGLE_API_KEY=<YOUR_GEMINI_API_KEY>
 ```bash
 npm install
 ```
-#### Setup Backend
-```bash
-npm install
-```
+
 #### Start the server:
 ```bash
 npm run dev
@@ -160,3 +159,5 @@ This project is licensed under the [MIT License](LICENSE).
 - [Tailwind CSS](https://tailwindcss.com/) for modern styling
 - [Express.js](https://expressjs.com/) for a robust backend
 - [MongoDB](https://www.mongodb.com/) for database management
+README.md
+8 KB
